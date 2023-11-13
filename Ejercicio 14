@@ -1,1 +1,76 @@
+# 14. Implementar sobre un grafo no dirigido los algoritmos necesario para dar solución a las siguientes tareas:
+# a. cada vértice representar un ambiente de una casa: cocina, comedor, cochera, quincho, baño 1, baño 2, habitación 1, habitación 2, sala de estar, terraza, patio;
+# b. cargar al menos tres aristas a cada vértice, y a dos de estas cárguele cinco, el peso de la arista es la distancia entre los ambientes, se debe cargar en metros;
+# c. obtener el árbol de expansión mínima y determine cuantos metros de cables se necesitan para conectar todos los ambientes;
+# d. determinar cuál es el camino más corto desde la habitación 1 hasta la sala de estar para determinar cuántos metros de cable de red se necesitan para conectar el router con el Smart Tv.
 
+from grafosoperaciones import Grafo
+
+grafo=Grafo(dirigido=False)
+
+#a. cada vértice representar un ambiente de una casa: cocina, comedor, cochera, quincho, baño 1, baño 2, habitación 1, habitación 2, sala de estar, terraza, patio;
+
+grafo.insert_vertice('Cocina')
+grafo.insert_vertice('Comedor')
+grafo.insert_vertice('Cochera')
+grafo.insert_vertice('Quincho')
+grafo.insert_vertice('Baño1')
+grafo.insert_vertice('Baño2')
+grafo.insert_vertice('Habitacion1')
+grafo.insert_vertice('Habitacion2')
+grafo.insert_vertice('Sala de Estar')
+grafo.insert_vertice('Terraza')
+grafo.insert_vertice('Patio')
+
+#b. cargar al menos tres aristas a cada vértice, y a dos de estas cárguele cinco, el peso de la arista es la distancia entre los ambientes, se debe cargar en metros;
+
+grafo.insert_arist('Cocina','Sala de Estar',5)
+grafo.insert_arist('Cocina','Quincho',7)
+grafo.insert_arist('Cocina','Baño2',6)
+grafo.insert_arist('Comedor','Terraza',10)
+grafo.insert_arist('Comedor','Cocina',2)
+grafo.insert_arist('Comedor','Habitacion2',6)
+grafo.insert_arist('Baño1','Habitacion1',7)
+grafo.insert_arist('Baño1','Terraza',4)
+grafo.insert_arist('Baño1','Cochera',11)
+grafo.insert_arist('Baño2','Patio',3)
+grafo.insert_arist('Baño2','Sala de Estar',6)
+grafo.insert_arist('Baño2','Habitacion2',8)
+grafo.insert_arist('Cochera','Comedor',12)
+grafo.insert_arist('Cochera','Habitacion1',14)
+grafo.insert_arist('Cochera','Terraza',10)
+grafo.insert_arist('Habitacion1','Patio', 7)
+grafo.insert_arist('Habitacion1','Quincho',9)
+grafo.insert_arist('Habitacion1','Habitacion2',5)
+grafo.insert_arist('Habitacion2','Sala de Estar',4)
+grafo.insert_arist('Habitacion2','Baño1',8)
+grafo.insert_arist('Habitacion2','Cochera',4)
+grafo.insert_arist('Sala de estar','Baño1',6)
+grafo.insert_arist('Sala de estar','Cochera',13)
+grafo.insert_arist('Sala de estar','Habitacion1',11)
+grafo.insert_arist('Quincho','Patio',1)
+grafo.insert_arist('Quincho','Baño2',7)
+grafo.insert_arist('Quincho','Habitacion2',9)
+grafo.insert_arist('Patio','Baño1',3)
+grafo.insert_arist('Patio','Habitacion2',6)
+grafo.insert_arist('Patio','Comedor',8)
+grafo.insert_arist('Terraza','Patio',8)
+grafo.insert_arist('Terraza','Baño2',4)
+grafo.insert_arist('Terraza','Quincho',10)
+
+# c. obtener el árbol de expansión mínima y determine cuantos metros de cables se necesitan para conectar todos los ambientes;
+
+
+# d. determinar cuál es el camino más corto desde la habitación 1 hasta la sala de estar para determinar cuántos metros de cable de red se necesitan para conectar el router con el Smart Tv.
+
+camino = grafo.dijkstra("habitacion 1","sala de estar")
+
+acum=0
+
+while camino.size()>0:
+    value = camino.pop()
+    if value[0] == "sala de estar":
+        acum+=value[1]
+
+
+print(f"Se necesitan {acum} metros para conectar la habitacion 1 y la sala de estar")
